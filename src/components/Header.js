@@ -5,7 +5,7 @@ function Header() {
     <nav className="navbar navbar-light bg-light">
       <div className="container">
         <a className="navbar-brand" href="#">
-          Navbar
+          Contact Manager
         </a>
       </div>
     </nav>
