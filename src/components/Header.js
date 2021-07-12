@@ -2,11 +2,13 @@ import React from "react";
 
 function Header() {
   return (
-    <div className="ui menu fixed">
-      <div className="ui container center">
-      <h2>Contact Manager</h2>
+    <nav className="navbar navbar-light bg-light">
+      <div className="container">
+        <a className="navbar-brand" href="#">
+          Navbar
+        </a>
       </div>
-    </div>
+    </nav>
   );
 }
 
