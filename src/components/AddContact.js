@@ -24,11 +24,12 @@ export default class AddContact extends Component {
     e.preventDefault();
     if (this.state.name === "" || this.state.email === "") {
       alert("All fields are required");
-      return 
+      return;
     }
-    
+
     this.props.addContactHandler(this.state);
     this.setState({ name: "", email: "" });
+    this.props.history.push("/");
   };
   render() {
     return (
