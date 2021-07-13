@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function ContactList(props) {
   const deleteConactHandler = (id) => {
-    props.getContactId(id);
+    props.removeContactHandler(id);
   };
 
   const renderList = props.contacts.map((contact) => {
