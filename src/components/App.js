@@ -5,14 +5,23 @@ import ContactList from "./ContactList";
 import Header from "./Header";
 import { uuid } from "uuidv4";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import  ContactDetails  from "./ContactDetail";
+import ContactDetails from "./ContactDetail";
+import api from "../api/contact";
 
 function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
 
-  const addContactHandler = (contact) => {
-    setContacts([...contacts, { id: uuid(), ...contact }]);
+  //retriveContact
+  const retriveContact = async () => {
+    const response = await api.get("/contacts");
+    return response;
+  };
+  const addContactHandler = async(contact) => {
+    const request={
+      id: uuid(), ...contact
+    }
+    const response=await api.post('/contacts',request);
+    setContacts([...contacts, response.data]);
   };
 
   const removeContactHandler = (id) => {
@@ -24,12 +33,14 @@ function App() {
   };
 
   useEffect(() => {
-    const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (retriveContacts) setContacts(retriveContacts);
+    const getAllContacts = async () => {
+      const allContacts = await retriveContact();
+      if (allContacts) setContacts(allContacts);
+    };
+    getAllContacts();
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
   return (

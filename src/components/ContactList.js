@@ -3,11 +3,12 @@ import ContactCards from "./ContactCards";
 import { Link } from "react-router-dom";
 
 function ContactList(props) {
+  
   const deleteConactHandler = (id) => {
     props.removeContactHandler(id);
   };
 
-  const renderList = props.contacts.map((contact) => {
+  const renderList = props.contacts?.data?.map((contact) => {
     return (
       <div className="card">
         <ContactCards
@@ -19,7 +20,7 @@ function ContactList(props) {
     );
   });
   return (
-    <div className="mt-4">
+    <div className="mt-4" >
       <div className="d-flex justify-content-between">
         <h2>Contact List</h2>
         <Link to="/add">
