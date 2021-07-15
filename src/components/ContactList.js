@@ -8,7 +8,8 @@ function ContactList(props) {
     props.removeContactHandler(id);
   };
 
-  const renderList = props.contacts?.data?.map((contact) => {
+  const renderList = props.contacts?.map((contact) => {
+    
     return (
       <div className="card">
         <ContactCards

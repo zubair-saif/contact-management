@@ -31,6 +31,12 @@ function ContactCards(props) {
               onClick={() => props.clickHander(id)}
             ></i>
           </span>
+          <Link to={{ pathname: `/edit`, state: { contact: props.contact } }}>
+            <i
+              className="bi bi-pencil-square"
+              style={{ color: "blue", marginTop: "7px" }}
+            ></i>
+          </Link>
         </li>
       </ul>
     </div>
