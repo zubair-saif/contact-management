@@ -24,7 +24,7 @@ class EditContact extends Component {
   render() {
     return (
       <div className="ui container">
-        <h2>Add Contact</h2>
+        <h2>Edit Contact</h2>
         <form onSubmit={this.update}>
           <div className="mb-3">
             <label className="form-label">Name</label>
