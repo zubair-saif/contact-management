@@ -7,9 +7,13 @@ import { uuid } from "uuidv4";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ContactDetails from "./ContactDetail";
 import api from "../api/contact";
-import EditContact from './EditContact'
+import EditContact from "./EditContact";
+import contact from "../api/contact";
+
 function App() {
   const [contacts, setContacts] = useState([]);
+  const [searchTerms, setSearchTerms] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
   //RetrieveContacts
   const retrieveContacts = async () => {
@@ -56,6 +60,22 @@ function App() {
   }, []);
 
   useEffect(() => {}, [contacts]);
+
+  const searchHandler = (searchTerms) => {
+    setSearchTerms(searchTerms);
+    if (searchTerms !== "") {
+      const newContactList = contacts.filter((contact) => {
+        return Object.values(contact)
+          .join("")
+          .toLowerCase()
+          .includes(searchTerms.toLowerCase());
+      });
+      setSearchResult(newContactList);
+    } else {
+      setSearchResult(contacts);
+    }
+  };
+
   return (
     <div className="ui container">
       <Router>
@@ -67,8 +87,10 @@ function App() {
             render={(props) => (
               <ContactList
                 {...props}
-                contacts={contacts}
+                contacts={searchTerms.length < 1 ? contacts : searchResult}
                 removeContactHandler={removeContactHandler}
+                term={searchTerms}
+                searchKeywords={searchHandler}
               />
             )}
           ></Route>
